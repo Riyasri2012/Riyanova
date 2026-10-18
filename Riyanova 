@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10091f">
+<title>RIYANOVA | One Mind. Endless Possibilities.</title>
+
+<style>
+:root {
+  --bg: #10091f;
+  --panel: #1c1230;
+  --purple: #a970ff;
+  --pink: #f18bff;
+  --text: #f7f0ff;
+  --muted: #c3b4d8;
+  --green: #6df0bc;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #38205d, var(--bg) 55%);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+}
+header {
+  padding: 23px 17px;
+  background: #160d25;
+  border-bottom: 1px solid #493162;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.brand {
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--pink);
+}
+.tagline { color: var(--muted); font-size: 12px; margin-top: 5px; }
+nav {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-top: 17px;
+}
+nav button, .btn {
+  background: linear-gradient(135deg, #a970ff, #7044d9);
+  color: white;
+  border: 0;
+  border-radius: 12px;
+  padding: 11px 13px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+}
+nav button { background: #302044; }
+nav button.active { background: #8b5ce5; }
+main { max-width: 850px; margin: auto; padding: 18px; }
+.hero, .card {
+  background: linear-gradient(145deg, #291943, #1b122c);
+  border: 1px solid #50366e;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 17px;
+  box-shadow: 0 10px 28px #0003;
+}
+.hero { padding: 27px 20px; }
+.hero h1 { font-size: 35px; margin: 10px 0; }
+.hero h1 span { color: var(--pink); }
+p { line-height: 1.6; }
+.muted { color: var(--muted); }
+.stats { display: flex; gap: 10px; flex-wrap: wrap; }
+.stat {
+  background: #160d25;
+  border-radius: 13px;
+  padding: 12px 15px;
+  flex: 1;
+  min-width: 90px;
+}
+.stat strong { display: block; font-size: 23px; color: var(--pink); }
+.section { display: none; }
+.section.active { display: block; }
+label { display: block; margin: 15px 0 7px; font-weight: bold; }
+input, textarea, select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #665080;
+  background: #10091f;
+  color: white;
+  font-size: 15px;
+}
+textarea { min-height: 105px; resize: vertical; }
+.result {
+  background: #120c1c;
+  border-left: 4px solid var(--purple);
+  padding: 14px;
+  border-radius: 8px;
+  margin-top: 15px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.teacher-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  gap: 10px;
+}
+.teacher {
+  background: #160d25;
+  border: 1px solid #493162;
+  border-radius: 14px;
+  padding: 12px;
+}
+.teacher .avatar { font-size: 30px; }
+.teacher input { margin-top: 8px; padding: 8px; }
+.badge {
+  display: inline-block;
+  background: #39234f;
+  color: #e9caff;
+  padding: 7px 10px;
+  border-radius: 20px;
+  margin: 4px;
+  font-size: 12px;
+}
+footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 25px 15px;
+  font-size: 12px;
+}
+small { color: var(--muted); }
+</style>
+</head>
+
+<body>
+<header>
+  <div class="brand">✦ RIYANOVA</div>
+  <div class="tagline">One Mind. Endless Possibilities.</div>
+  <nav>
+    <button class="active" onclick="showTab('home',this)">🏠 Home</button>
+    <button onclick="showTab('coach',this)">📝 Answer Coach</button>
+    <button onclick="showTab('checker',this)">🧠 Answer Checker</button>
+    <button onclick="showTab('teachers',this)">👩‍🏫 AI Teachers</button>
+    <button onclick="showTab('profile',this)">🌟 My Profile</button>
+  </nav>
+</header>
+
+<main>
+<section id="home" class="section active">
+  <div class="hero">
+    <span class="badge">YOUR LEARNING UNIVERSE 🌌</span>
+    <h1>Learn smarter.<br><span>Rise further.</span></h1>
+    <p>Practise exam answers, learn how to earn marks, choose your AI teacher, and make progress one step at a time.</p>
+    <button class="btn" onclick="showTab('coach',document.querySelectorAll('nav button')[1])">Start learning 🚀</button>
+  </div>
+
+  <div class="card">
+    <h2>🌟 Your journey</h2>
+    <div class="stats">
+      <div class="stat"><strong id="points">0</strong><small>Points</small></div>
+      <div class="stat"><strong id="attempts">0</strong><small>Practices</small></div>
+      <div class="stat"><strong id="level">1</strong><small>Level</small></div>
+    </div>
+    <p id="welcome" class="muted">Welcome, learner! Set up your profile to begin.</p>
+  </div>
+
+  <div class="card">
+    <h2>🎯 What can you do here?</h2>
+    <p>📝 Learn how to structure 1-, 2-, 5-, and 8-mark answers.</p>
+    <p>🧠 Compare answers and identify possible missing points.</p>
+    <p>👩‍🏫 Personalize six boy and six girl AI teacher profiles.</p>
+    <p>🏆 Earn practice points and track your learning progress.</p>
+  </div>
+</section>
+
+<section id="coach" class="section">
+  <div class="card">
+    <h2>📝 Public Exam Answer Coach</h2>
+    <p class="muted">Choose the mark value to see a useful answer-writing structure.</p>
+    <label>Question type</label>
+    <select id="marks" onchange="showStructure()">
+      <option value="1">1 mark</option>
+      <option value="2">2 marks</option>
+      <option value="5">5 marks</option>
+      <option value="8">8 marks</option>
+    </select>
+    <div id="structure" class="result"></div>
+  </div>
+
+  <div class="card">
+    <h2>📚 Practise a question</h2>
+    <label>Subject</label>
+    <input id="subject" placeholder="e.g. Science, History, Maths">
+    <label>Question</label>
+    <textarea id="question" placeholder="Type your textbook or exam question"></textarea>
+    <label>What is the mark value?</label>
+    <select id="practiceMarks">
+      <option>1 mark</option>
+      <option>2 marks</option>
+      <option>5 marks</option>
+      <option>8 marks</option>
+    </select>
+    <button class="btn" onclick="makePlan()">Show my answer plan</button>
+    <div id="plan" class="result" hidden></div>
+  </div>
+</section>
+
+<section id="checker" class="section">
+  <div class="card">
+    <h2>🧠 Answer Checker Demo</h2>
+    <p class="muted">Enter a reference answer and your answer. This basic demo checks word overlap, not full meaning. It is not an official mark predictor.</p>
+
+    <label>Question</label>
+    <textarea id="checkQuestion" placeholder="Type the question here"></textarea>
+
+    <label>Reference answer</label>
+    <textarea id="reference" placeholder="Enter the correct answer or key points"></textarea>
+
+    <label>Your answer</label>
+    <textarea id="studentAnswer" placeholder="Enter your answer here"></textarea>
+
+    <label>Maximum marks</label>
+    <select id="maxMarks">
+      <option value="1">1 mark</option>
+      <option value="2">2 marks</option>
+      <option value="5">5 marks</option>
+      <option value="8">8 marks</option>
+    </select>
+
+    <button class="btn" onclick="checkAnswer()">Review my answer ✨</button>
+    <div id="feedback" class="result" hidden></div>
+  </div>
+</section>
+
+<section id="teachers" class="section">
+  <div class="card">
+    <h2>👩‍🏫 Choose your AI teacher</h2>
+    <p class="muted">Customize all 12 demo teacher names and nicknames. These are profile placeholders, not connected AI tutors yet.</p>
+    <div class="teacher-grid" id="teacherGrid"></div>
+    <button class="btn" onclick="saveTeachers()">Save teacher names</button>
+    <p id="teacherStatus" class="muted"></p>
+  </div>
+</section>
+
+<section id="profile" class="section">
+  <div class="card">
+    <h2>🌟 Your learner profile</h2>
+    <label>Your name or nickname</label>
+    <input id="studentName" placeholder="What should we call you?">
+    <label>Class or learning level</label>
+    <input id="studentClass" placeholder="e.g. Class 10">
+    <label>Your board or curriculum</label>
+    <select id="board">
+      <option>Tamil Nadu State Board</option>
+      <option>CBSE</option>
+      <option>ICSE</option>
+      <option>IB</option>
+      <option>IGCSE</option>
+      <option>Other state or national board</option>
+      <option>College / Adult learning</option>
+    </select>
+    <button class="btn" onclick="saveProfile()">Save profile</button>
+    <p class="muted">Use a nickname if you prefer not to share your real name.</p>
+  </div>
+  <div class="card">
+    <h2>🏆 Achievements</h2>
+    <div id="badges"><span class="badge">🌱 First Steps</span></div>
+    <button class="btn" onclick="resetProgress()">Reset demo progress</button>
+  </div>
+</section>
+</main>
+
+<footer>
+  RIYANOVA • One Mind. Endless Possibilities. 💜<br>
+  Free learning prototype • Your progress is stored in this browser.
+  <p>Demo only: no real AI, OCR, accounts, or verified official marking schemes are connected yet.</p>
+</footer>
+
+<script>
+const defaults = {
+  points: 0,
+  attempts: 0,
+  name: "",
+  studentClass: "",
+  board: "Tamil Nadu State Board",
+  teachers: []
+};
+
+let data;
+try {
+  data = {...defaults, ...JSON.parse(localStorage.getItem("riyanovaData") || "{}")};
+} catch (e) {
+  data = {...defaults};
+}
+
+function saveData() {
+  try {
+    localStorage.setItem("riyanovaData", JSON.stringify(data));
+  } catch (e) {}
+  updateStats();
+}
+
+function showTab(id, button) {
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+  if (button) button.classList.add("active");
+  window.scrollTo(0, 0);
+}
+
+const structures = {
+  1: `<b>1-MARK ANSWER</b><br>
+  • Give the exact definition, term, formula, or fact requested.<br>
+  • Keep it short and correct.<br>
+  • Add an example only if required by the question.<br>
+  <b>Remember:</b> One clear answer, no unnecessary story!`,
+  2: `<b>2-MARK ANSWER</b><br>
+  • Write the definition or main idea.<br>
+  • Add one important explanation, reason, feature, or example.<br>
+  • Use two clear points if the question asks for them.<br>
+  <b>Remember:</b> Answer exactly what is asked.`,
+  5: `<b>5-MARK ANSWER</b><br>
+  1. Write a suitable title if appropriate.<br>
+  2. Start with a short introduction or definition.<br>
+  3. Explain the main points in numbered order.<br>
+  4. Add relevant examples, equations, or a labelled diagram when required.<br>
+  5. Finish with a short conclusion if suitable.<br>
+  <b>Remember:</b> Match the question and the syllabus.`,
+  8: `<b>8-MARK ANSWER</b><br>
+  1. Write a clear, relevant title when appropriate.<br>
+  2. Begin with an introduction or definition.<br>
+  3. Divide the answer into meaningful headings or points.<br>
+  4. Explain each point in simple, complete sentences.<br>
+  5. Include textbook keywords, facts, examples, equations, or diagrams where relevant.<br>
+  6. Explain steps in the correct order if the question asks for a process.<br>
+  7. End with a conclusion when appropriate.<br>
+  <b>Remember:</b> The exact structure depends on the subject and question.`
+};
+
+function showStructure() {
+  document.getElementById("structure").innerHTML = structures[document.getElementById("marks").value];
+}
+showStructure();
+
+function makePlan() {
+  const q = document.getElementById("question").value.trim();
+  const subject = document.getElementById("subject").value.trim() || "your subject";
+  const marks = document.getElementById("practiceMarks").value;
+  const box = document.getElementById("plan");
+  if (!q) {
+    box.hidden = false;
+    box.textContent = "Please type your question first.";
+    return;
+  }
+  box.hidden = false;
+  box.innerHTML = `<b>Answer plan for ${subject}</b><br><br>
+  <b>Question:</b> ${escapeHTML(q)}<br><br>
+  ${structures[parseInt(marks)]}<br><br>
+  <b>Next step:</b> Check your textbook for the exact points and keywords expected for this question.`;
+  addPractice(5);
+}
+
+function normalize(s) {
+  return s.toLowerCase().replace(/[^a-z0-9\s]/g, " ").split(/\s+/).filter(w => w.length > 2);
+}
+
+function escapeHTML(s) {
+  return s.replace(/[&<>"']/g, c => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;",
+    '"': "&quot;", "'": "&#39;"
+  }[c]));
+}
+
+function checkAnswer() {
+  const ref = document.getElementById("reference").value.trim();
+  const ans = document.getElementById("studentAnswer").value.trim();
+  const marks = Number(document.getElementById("maxMarks").value);
+  const box = document.getElementById("feedback");
+  box.hidden = false;
+
+  if (!ref || !ans) {
+    box.textContent = "Please enter both the reference answer and your answer.";
+    return;
+  }
+
+  const stop = new Set([
+    "the","and","for","are","was","were","with","that","this","from",
+    "which","their","they","them","then","than","have","has","had",
+    "into","also","can","may","will","does","did","its","our","you",
+    "your","what","when","where","why","how","write","explain","give"
+  ]);
+
+  const refWords = [...new Set(normalize(ref).filter(w => !stop.has(w)))];
+  const answerWords = new Set(normalize(ans));
+  const matched = refWords.filter(w => answerWords.has(w));
+  const missing = refWords.filter(w => !answerWords.has(w));
+  const ratio = refWords.length ? matched.length / refWords.length : 0;
+
+  let level = ratio >= 0.8 ? "Many reference words are present" :
+              ratio >= 0.5 ? "Some reference words are present" :
+              "Several reference words may be missing";
+
+  box.innerHTML = `<b>Demo review: ${level}</b><br>
+  Word overlap: ${Math.round(ratio * 100)}%<br>
+  Matching words: ${matched.length} of ${refWords.length}<br>
+  <br><b>Possible missing words:</b> ${
+    missing.length ? missing.map(escapeHTML).join(", ") : "No major reference words missing"
+  }<br><br>
+  <b>Your next step:</b> Check whether your answer explains the correct concepts, facts, and required points. A matching keyword does not prove that the meaning is correct, and different wording can still be correct.<br><br>
+  <b>Marks:</b> This demo does not award a reliable score out of ${marks}. A proper mark estimate needs question-specific marking criteria and semantic evaluation.`;
+
+  addPractice(10);
+}
+
+function addPractice(amount) {
+  data.points = (data.points || 0) + amount;
+  data.attempts = (data.attempts || 0) + 1;
+  saveData();
+}
+
+function updateStats() {
+  document.getElementById("points").textContent = data.points || 0;
+  document.getElementById("attempts").textContent = data.attempts || 0;
+  document.getElementById("level").textContent = Math.floor((data.points || 0) / 50) + 1;
+  document.getElementById("welcome").textContent = data.name
+    ? `Welcome back, ${data.name}! Keep learning and growing. 🌟`
+    : "Welcome, learner! Set up your profile to begin.";
+  const badges = [];
+  if ((data.attempts || 0) >= 1) badges.push("🌱 First Practice");
+  if ((data.attempts || 0) >= 5) badges.push("🔥 Practice Starter");
+  if ((data.points || 0) >= 50) badges.push("⭐ Rising Star");
+  if ((data.points || 0) >= 100) badges.push("🏆 Learning Champion");
+  document.getElementById("badges").innerHTML = badges.map(b => `<span class="badge">${b}</span>`).join("") || '<span class="badge">🌱 First Steps</span>';
+}
+
+function saveProfile() {
+  data.name = document.getElementById("studentName").value.trim();
+  data.studentClass = document.getElementById("studentClass").value.trim();
+  data.board = document.getElementById("board").value;
+  saveData();
+  alert("Profile saved on this device! 💜");
+}
+
+const teacherSeeds = [
+  ["👨‍🏫","Teacher 1","Boy"], ["👩‍🏫","Teacher 2","Girl"],
+  ["🧑‍🏫","Teacher 3","Boy"], ["👩🏻‍🏫","Teacher 4","Girl"],
+  ["👨🏻‍🏫","Teacher 5","Boy"], ["👩🏽‍🏫","Teacher 6","Girl"],
+  ["👨🏽‍🏫","Teacher 7","Boy"], ["👩🏾‍🏫","Teacher 8","Girl"],
+  ["👨🏾‍🏫","Teacher 9","Boy"], ["👩🏼‍🏫","Teacher 10","Girl"],
+  ["👨🏼‍🏫","Teacher 11","Boy"], ["👩‍💻","Teacher 12","Girl"]
+];
+
+function renderTeachers() {
+  const grid = document.getElementById("teacherGrid");
+  grid.innerHTML = "";
+  teacherSeeds.forEach((t, i) => {
+    const saved = data.teachers[i] || {};
+    const name = saved.name || t[1];
+    const nick = saved.nick || "";
+    grid.innerHTML += `<div class="teacher">
+      <div class="avatar">${t[0]}</div>
+      <small>${t[2]} teacher profile ${i+1}</small>
+      <input id="tname${i}" aria-label="Teacher ${i+1} name" value="${escapeHTML(name)}" placeholder="Teacher name">
+      <input id="tnick${i}" aria-label="Teacher ${i+1} nickname" value="${escapeHTML(nick)}" placeholder="Nickname">
+    </div>`;
+  });
+}
+
+function saveTeachers() {
+  data.teachers = teacherSeeds.map((t, i) => ({
+    name: document.getElementById("tname"+i).value.trim() || t[1],
+    nick: document.getElementById("tnick"+i).value.trim()
+  }));
+  saveData();
+  document.getElementById("teacherStatus").textContent = "Your teacher profile names are saved on this device! 💜";
+}
+
+function resetProgress() {
+  if (!confirm("Reset your points and practice history on this device?")) return;
+  data.points = 0;
+  data.attempts = 0;
+  saveData();
+}
+
+document.getElementById("studentName").value = data.name || "";
+document.getElementById("studentClass").value = data.studentClass || "";
+document.getElementById("board").value = data.board || "Tamil Nadu State Board";
+renderTeachers();
+updateStats();
+</script>
+</body>
+</html>
